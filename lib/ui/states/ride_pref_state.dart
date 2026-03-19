@@ -11,6 +11,8 @@ class RidePreferenceState extends ChangeNotifier {
   RidePreferenceState({required this.repository});
   List<RidePreference> get history => _history;
 
+  RidePreference? get selectedPreference => _selectedPreference;
+
   Future<void> loadHistory() async {
     _history = await repository.getHistory();
     notifyListeners();
