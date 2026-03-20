@@ -13,13 +13,15 @@ class RideSelectionContent extends StatelessWidget {
   const RideSelectionContent({super.key, required this.viewModel});
 
   void onRideSelected(Ride ride) {
-    // TODO: implement ride selection action
+
   }
 
   void onPreferencePressed(BuildContext context) async {
+    final pref = viewModel.currentPreference;
+    if (pref == null) return;
     final newPref = await Navigator.of(context).push<RidePreference>(
       AnimationUtils.createRightToLeftRoute(
-        RidePreferenceModal(initialPreference: viewModel.currentPreference!),
+        RidePreferenceModal(initialPreference: viewModel.currentPreference),
       ),
     );
 

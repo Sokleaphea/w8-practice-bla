@@ -18,11 +18,18 @@ class RideSelectionModel extends ChangeNotifier {
   List<Ride> get matchingRides => _matchingRides;
   void _loadRides() async {
     final pref = rideState.selectedPreference;
-    if (pref != null) {
-      _matchingRides = await rideRepo.getRideFor(pref);
-    } else {
+
+    if (pref == null) {
       _matchingRides = [];
+      notifyListeners();
+      return;
     }
+    _matchingRides = await rideRepo.getRideFor(pref);
+    // if (pref != null) {
+    //   _matchingRides = await rideRepo.getRideFor(pref);
+    // } else {
+    //   _matchingRides = [];
+    // }
     notifyListeners();
   }
 
